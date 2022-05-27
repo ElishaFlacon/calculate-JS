@@ -68,9 +68,9 @@ h1 {
 }
 
 .form__input {
-    margin: 5px 10px -2px 0px;
+    margin: 5px 5px -10px 0px;
     font-size: 26px;
-    width: 95%;
+    color: rgb(0, 0, 0);
     height: 60px;
     text-align: right;
 }
@@ -102,6 +102,10 @@ h1 {
 
 .yellow {
     background: rgb(255, 250, 0);
+}
+
+.dont-working {
+    background: rgb(220, 60, 60);
 }
 
 .keyborad__button:hover {

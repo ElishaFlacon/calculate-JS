@@ -1,147 +1,139 @@
+//* ЗАДАЕМ ПЕРЕМЕННЫЕ 
 
 
-// let appendFormInputSymbol = function (value) {
-//     formInput.value = value;
-// };
+let numA = '';
+let numB = '';
+let symbol = '';
+let infoSymbols = '';
+let finish = false;
+
+// константы всех знаков
+const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.',];
+const SYMBOLS = ['-', '+', 'x', '/',];
+
+// константа инпута
+const INPUT = document.querySelector('.form__input');
+
+// константа информации
+const INFO = document.querySelector('.form__info');
 
 
+//! ФУНКЦИОНАЛ
+// функция очистки
+function clearInput() {
+    numA = '';
+    numB = '';
+    symbol = '';
+    infoSymbols = '';
+    INPUT.textContent = '0';
+    INFO.textContent = '0';
+}
 
+document.querySelector('.keyboard').onclick = (event) => {
+    // если нажата не кнопка - пропускаем
+    if (!event.target.classList.contains('keyborad__button')) console.log('net');
+    // если нажата кнопка очистки
+    if (event.target.classList.contains('clear')) {
+        clearInput();
+    };
 
-//* ЗАДАЕМ КОНСТАНТЫ 
+    // получаем нажатую кнопку
+    const key = event.target.textContent;
 
-let appendFormInputSymbol
+    // если нажата циферка или точка
+    if (NUMBERS.includes(key)) {
+        if (numB == '' && symbol == '') {
+            // проверка на длинну строки (должно быть не больше 21, а то выглядит не красиво xD)
+            if (numA.length < 21) {
+                numA += key;
+                infoSymbols += key;
+                INFO.textContent = infoSymbols;
+                INPUT.textContent = numA;
+            } else {
+                INFO.textContent = 'МАКСИМУМ ЧИСЕЛ!';
+                INPUT.textContent = numA;
+            };
+        } else if (numA !== '' && numB !== '' && finish) {
+            numB = key;
+            infoSymbols += key;
+            INFO.textContent = infoSymbols;
+            finish = false;
+            INPUT.textContent = numB;
+        } else {
+            if (numB.length < 21) {
+                numB += key;
+                infoSymbols += key;
+                INFO.textContent = infoSymbols;
+                INPUT.textContent = numB;
+            } else {
+                INFO.textContent = 'МАКСИМУМ ЧИСЕЛ!';
+                INPUT.textContent = numB;
+            };
+        };
+    };
 
-let MishaRak
+    // если нажат знак (+ - * /)
+    if (SYMBOLS.includes(key) && numA !== '') {
+        //! не смог пофиксить баг (можно было в инпут с инфой накидать кучу знаков -> 8-+-/xx*7)?
+        //! значит делаем из этого фичу, теперь знак нельзя поменять!!!
+        if (symbol === '') {
+            symbol = key;
+            infoSymbols += symbol;
+            INFO.textContent = infoSymbols;
+            INPUT.textContent = symbol;
+        };
+    };
 
-
-
-const formInput = document.querySelector('.form__input');
-const formInfo = document.getElementsByClassName('form__info');
-
-
-
-const allId =
-    [document.querySelector('#kC').addEventListener('click', appendFormInputSymbol = () => formInput.value = ''),
-    document.querySelector('#kC').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML = ""),
-    document.querySelector('#kSk').addEventListener('click', appendFormInputSymbol = () => formInput.value += '('),
-    document.querySelector('#kSk').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "О1"),
-    document.querySelector('#kSc').addEventListener('click', appendFormInputSymbol = () => formInput.value += ')'),
-    document.querySelector('#kSc').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОБКА"),
-    document.querySelector('#kSl').addEventListener('click', appendFormInputSymbol = () => formInput.value += '/'),
-    document.querySelector('#kSl').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШ0КА"),
-    document.querySelector('#kx').addEventListener('click', appendFormInputSymbol = () => formInput.value += '*'),
-    document.querySelector('#kx').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОША"),
-    document.querySelector('#kM').addEventListener('click', appendFormInputSymbol = () => formInput.value += '-'),
-    document.querySelector('#kM').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОА"),
-    document.querySelector('#kP').addEventListener('click', appendFormInputSymbol = () => formInput.value += '+'),
-    document.querySelector('#kP').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШ"),
-    document.querySelector('#kD').addEventListener('click', appendFormInputSymbol = () => formInput.value += '.'),
-    document.querySelector('#kD').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "А"),
-    document.querySelector('#kZ').addEventListener('click', appendFormInputSymbol = () => formInput.value += '%'),
-    document.querySelector('#kZ').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШКА"),
-    document.querySelector('#kE').addEventListener('click', appendFormInputSymbol = () => formInput.value = 'ЖЕСТКО НАСЧИТАЛ'),
-    document.querySelector('#kE').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML = "НetОШИБКИ"),
-    document.querySelector('#k1').addEventListener('click', appendFormInputSymbol = () => formInput.value += '1'),
-    document.querySelector('#k1').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "32ИБКА"),
-    document.querySelector('#k2').addEventListener('click', appendFormInputSymbol = () => formInput.value += '2'),
-    document.querySelector('#k2').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШd4А"),
-    document.querySelector('#k3').addEventListener('click', appendFormInputSymbol = () => formInput.value += '3'),
-    document.querySelector('#k3').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШ2ИБКА"),
-    document.querySelector('#k4').addEventListener('click', appendFormInputSymbol = () => formInput.value += '4'),
-    document.querySelector('#k4').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШИА"),
-    document.querySelector('#k5').addEventListener('click', appendFormInputSymbol = () => formInput.value += '5'),
-    document.querySelector('#k5').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШ"),
-    document.querySelector('#k6').addEventListener('click', appendFormInputSymbol = () => formInput.value += '6'),
-    document.querySelector('#k6').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "Jib,rA"),
-    document.querySelector('#k7').addEventListener('click', appendFormInputSymbol = () => formInput.value += '7'),
-    document.querySelector('#k7').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШИКА"),
-    document.querySelector('#k8').addEventListener('click', appendFormInputSymbol = () => formInput.value += '8'),
-    document.querySelector('#k8').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОКА"),
-    document.querySelector('#k9').addEventListener('click', appendFormInputSymbol = () => formInput.value += '9'),
-    document.querySelector('#k9').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ИШБКА"),
-    document.querySelector('#k0').addEventListener('click', appendFormInputSymbol = () => formInput.value += '0'),
-    document.querySelector('#k0').addEventListener('click', appendFormInputSymbol = () => formInfo[0].innerHTML += "ОШИБ9КА"),];
-
-// const allSimbol = {
-//     'C': true,
-//     '(': '(',
-//     ')': ')',
-//     '/': '/',
-//     'x': '*',
-//     '-': '-',
-//     '+': '+',
-//     ',': '.',
-//     '%': '%',
-//     '1': '1',
-//     '2': '2',
-//     '3': '3',
-//     '4': '4',
-//     '5': '5',
-//     '6': '6',
-//     '7': '7',
-//     '8': '8',
-//     '9': '9',
-//     '0': '0',
-// };
-
-allId.onclick = function asd() {
-
+    // если нажат знак (=)
+    if (key === '=' && numA !== '') {
+        switch (symbol) {
+            case '+':
+                numA = (+numA) + (+numB);
+                break;
+            case '-':
+                numA = numA - numB;
+                break;
+            case 'x':
+                numA = numA * numB;
+                break;
+            case '/':
+                if (numB === '0') {
+                    INPUT.textContent = 'На 0 не делится!';
+                    INFO.textContent = 'Ошибка!';
+                    numA = '';
+                    numB = '';
+                    symbol = '';
+                    return;
+                };
+                numA = numA / numB;
+                break;
+        };
+        finish = true;
+        symbol = '';
+        INPUT.textContent = numA;
+    };
 };
 
 
 
-function TEST() {
-    console.log('TEST CONFIRM')
-};
+
+// -------------------------------------------------------------------------- //
+
+//         ———————————Нет функционала у процента и скобочек?————
+//            ⠀⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝
+//            ⠸⡸⠜⠕⠕⠁⢁⢇⢏⢽⢺⣪⡳⡝⣎⣏⢯⢞⡿⣟⣷⣳⢯⡷⣽⢽⢯⣳⣫⠇
+//            ⠀⠀⢀⢀⢄⢬⢪⡪⡎⣆⡈⠚⠜⠕⠇⠗⠝⢕⢯⢫⣞⣯⣿⣻⡽⣏⢗⣗⠏⠀
+//            ⠀⠪⡪⡪⣪⢪⢺⢸⢢⢓⢆⢤⢀⠀⠀⠀⠀⠈⢊⢞⡾⣿⡯⣏⢮⠷⠁⠀⠀
+//            ⠀⠀⠀⠈⠊⠆⡃⠕⢕⢇⢇⢇⢇⢇⢏⢎⢎⢆⢄⠀⢑⣽⣿⢝⠲⠉⠀⠀⠀⠀
+//            ⠀⠀⠀⠀⠀⡿⠂⠠⠀⡇⢇⠕⢈⣀⠀⠁⠡⠣⡣⡫⣂⣿⠯⢪⠰⠂⠀⠀⠀⠀
+//            ⠀⠀⠀⠀⡦⡙⡂⢀⢤⢣⠣⡈⣾⡃⠠⠄⠀⡄⢱⣌⣶⢏⢊⠂⠀⠀⠀⠀⠀⠀
+//            ⠀⠀⠀⠀⢝⡲⣜⡮⡏⢎⢌⢂⠙⠢⠐⢀⢘⢵⣽⣿⡿⠁⠁⠀⠀⠀⠀⠀⠀⠀
+//            ⠀⠀⠀⠀⠨⣺⡺⡕⡕⡱⡑⡆⡕⡅⡕⡜⡼⢽⡻⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//            ⠀⠀⠀⠀⣼⣳⣫⣾⣵⣗⡵⡱⡡⢣⢑⢕⢜⢕⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//           ⠀⠀⠀⣴⣿⣾⣿⣿⣿⡿⡽⡑⢌⠪⡢⡣⣣⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//          ⠀⠀⠀⡟⡾⣿⢿⢿⢵⣽⣾⣼⣘⢸⢸⣞⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//            ⠀⠀⠀⠀⠁⠇⠡⠩⡫⢿⣝⡻⡮⣒⢽⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+//         ———————————————————————————————————————————————————
 
 
-// checkClickOnButton(0);
-
-
-
-// function checkClickOnButton(btn) {
-//     allId[btn].onclick = function kkk() {
-//         TEST()
-//     };
-// };
-
-
-
-
-
-
-
-
-
-
-//! фУНКЦИИ
-
-// function appendFormInputSymbol() {
-
-//     for (let key in allSimbol) {
-//         if (allId === allSimbol[key]) {
-//             for (let value in allSimbol[key]) {
-//                 formInfo.innerHTML(value)
-//             };
-//         };
-//     };
-
-// };
-
-
-
-
-// console.log(formInput);
-// console.log(formInfo);
-// console.log(allId)
-
-
-
-
-
-
-
-
-
-
-
+// -------------------------------------------------------------------------- //
