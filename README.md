@@ -15,10 +15,9 @@
   🛠️ Инструменты, которые использовались при разработке приложения:
 </h2>
 
-- html
-- css
-- js
-- bem (я пытался...)
+- JavaScript
+- HTML CSS
+- BEM
 
 
 
@@ -30,9 +29,9 @@
   🚀 Зпуск приложения:
 </h2>
 
-- git clone https://github.com/ElishaFlacon/calculator-native-js.git
-- cd calculator-native-js
-- start index.html
+- `git clone https://github.com/ElishaFlacon/calculator-native-js.git`
+- `cd calculator-native-js`
+- `start index.html`
 <h3>
     Запускаем, не работет, ура! 🗿🚬
 </h3>
